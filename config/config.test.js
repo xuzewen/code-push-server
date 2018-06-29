@@ -13,7 +13,7 @@ config.test = {
   },
   local: {
     storageDir: os.tmpdir(),
-    downloadUrl: "http://127.0.0.1:4000/download",
+    downloadUrl: "http://codepush.btxy.com/download",
     public: '/download'
   },
   jwt: {
