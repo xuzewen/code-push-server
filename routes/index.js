@@ -52,7 +52,7 @@ router.get('/updateCheck', (req, res, next) => {
         next(e);
       }
     });
-  }, 100)
+  }, 500)
 });
 
 router.post('/reportStatus/download', (req, res) => {
