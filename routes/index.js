@@ -35,22 +35,24 @@ router.get('/tokens', (req, res) => {
 });
 
 router.get('/updateCheck', (req, res, next) => {
-  var deploymentKey = _.get(req, "query.deploymentKey");
-  var appVersion = _.get(req, "query.appVersion");
-  var label = _.get(req, "query.label");
-  var packageHash = _.get(req, "query.packageHash")
-  var clientManager = new ClientManager();
-  clientManager.updateCheckFromCache(deploymentKey, appVersion, label, packageHash)
-  .then((rs) => {
-    res.send({"updateInfo":rs});
-  })
-  .catch((e) => {
-    if (e instanceof AppError.AppError) {
-      res.status(404).send(e.message);
-    } else {
-      next(e);
-    }
-  });
+  setTimeout(function(){
+    var deploymentKey = _.get(req, "query.deploymentKey");
+    var appVersion = _.get(req, "query.appVersion");
+    var label = _.get(req, "query.label");
+    var packageHash = _.get(req, "query.packageHash")
+    var clientManager = new ClientManager();
+    clientManager.updateCheckFromCache(deploymentKey, appVersion, label, packageHash)
+    .then((rs) => {
+      res.send({"updateInfo":rs});
+    })
+    .catch((e) => {
+      if (e instanceof AppError.AppError) {
+        res.status(404).send(e.message);
+      } else {
+        next(e);
+      }
+    });
+  }, 100)
 });
 
 router.post('/reportStatus/download', (req, res) => {
